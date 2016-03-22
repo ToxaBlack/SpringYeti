@@ -1,7 +1,7 @@
-package com.antonchernov.yetilibrary.controller;
+package com.antonchernov.yetilibrary.rest.controller;
 
-import com.antonchernov.yetilibrary.model.Book;
-import com.antonchernov.yetilibrary.repository.BookRepository;
+import com.antonchernov.yetilibrary.rest.model.Book;
+import com.antonchernov.yetilibrary.rest.repository.BookRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

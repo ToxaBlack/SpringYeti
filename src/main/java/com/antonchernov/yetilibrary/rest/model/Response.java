@@ -1,6 +1,4 @@
-package com.antonchernov.yetilibrary.model;
-
-import lombok.Data;
+package com.antonchernov.yetilibrary.rest.model;
 
 /**
  * Created by anton.charnou on 21.03.2016.

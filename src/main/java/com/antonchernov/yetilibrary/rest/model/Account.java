@@ -1,8 +1,7 @@
-package com.antonchernov.yetilibrary.model;
+package com.antonchernov.yetilibrary.rest.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.List;
 
@@ -27,13 +26,6 @@ public class Account {
     public Account() {
     }
 
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
 
     public String getPassword() {
         return password;

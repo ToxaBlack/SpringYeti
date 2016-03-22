@@ -1,9 +1,6 @@
-package com.antonchernov.yetilibrary.model;
+package com.antonchernov.yetilibrary.rest.model;
 
-import lombok.Data;
 import org.springframework.data.annotation.Id;
-
-import java.util.Date;
 
 /**
  * Created by anton.charnou on 21.03.2016.

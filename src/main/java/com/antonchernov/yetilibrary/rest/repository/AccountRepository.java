@@ -1,6 +1,6 @@
-package com.antonchernov.yetilibrary.repository;
+package com.antonchernov.yetilibrary.rest.repository;
 
-import com.antonchernov.yetilibrary.model.Account;
+import com.antonchernov.yetilibrary.rest.model.Account;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**

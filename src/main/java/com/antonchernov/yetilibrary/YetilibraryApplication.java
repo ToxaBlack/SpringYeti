@@ -1,36 +1,26 @@
 package com.antonchernov.yetilibrary;
 
-import com.antonchernov.yetilibrary.model.Account;
-import com.antonchernov.yetilibrary.repository.AccountRepository;
-import com.antonchernov.yetilibrary.security.JwtFilter;
+import com.antonchernov.yetilibrary.configuration.ApplicationSecurity;
+import com.antonchernov.yetilibrary.rest.model.Account;
+import com.antonchernov.yetilibrary.rest.repository.AccountRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @SpringBootApplication
 @EnableAutoConfiguration
-@ComponentScan({"com.antonchernov.yetilibrary"})
+@ComponentScan
 public class YetilibraryApplication {
-
 	@Bean
-	public FilterRegistrationBean jwtFilter() {
-		final FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-		registrationBean.setFilter(new JwtFilter());
-		registrationBean.addUrlPatterns("/api/*");
-
-		return registrationBean;
+	public WebSecurityConfigurerAdapter webSecurityConfigurerAdapter() {
+		return new ApplicationSecurity();
 	}
 
-	@Bean
-	CommandLineRunner init(final AccountRepository accountRepository) {
 
-		return arg0 -> accountRepository.save(new Account("user", "password"));
-
-	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(YetilibraryApplication.class, args);
