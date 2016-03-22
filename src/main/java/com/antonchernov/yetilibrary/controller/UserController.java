@@ -12,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 @RestController
@@ -25,18 +26,17 @@ public class UserController {
 
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public Response login(@RequestBody Account account)
+    public Response login(@RequestBody Account account, HttpServletResponse response)
             throws ServletException {
         if (account.getUsername() == null || account.getPassword() == null) {
-            throw new ServletException("Invalid username or password");
+            return new Response();
         }
         Account dbAccount = accountRepository.findByUsername(account.getUsername());
         if (Objects.isNull(dbAccount) || !StringUtils.equals(dbAccount.getPassword(), account.getPassword())) {
             throw new ServletException("Invalid username");
         }
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization",Jwts.builder().setSubject(account.getUsername())
+        response.setHeader("Authorization", "Bearer " + Jwts.builder().setSubject(account.getUsername())
                 .claim("roles", dbAccount.getRoles()).setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS256, secretKey).compact());
         return new Response();

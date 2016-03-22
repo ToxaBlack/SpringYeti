@@ -8,6 +8,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.filter.GenericFilterBean;
 
 import io.jsonwebtoken.Claims;
@@ -15,6 +16,9 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureException;
 
 public class JwtFilter extends GenericFilterBean {
+
+    @Value("${secretKey}")
+    private String secretKey;
 
     @Override
     public void doFilter(final ServletRequest req,
@@ -27,7 +31,7 @@ public class JwtFilter extends GenericFilterBean {
             throw new ServletException("Missing or invalid Authorization header.");
         }
 
-        final String token = authHeader.substring(7); // The part after "Bearer "
+        final String token = authHeader.substring(7);
 
         try {
             final Claims claims = Jwts.parser().setSigningKey("secretkey")
