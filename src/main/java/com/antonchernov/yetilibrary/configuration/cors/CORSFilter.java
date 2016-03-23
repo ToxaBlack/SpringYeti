@@ -1,6 +1,7 @@
 package com.antonchernov.yetilibrary.configuration.cors;
 
 import com.antonchernov.yetilibrary.configuration.csrf.CSRF;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+
 
 public class CORSFilter implements Filter {
 

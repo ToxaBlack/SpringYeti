@@ -3,6 +3,7 @@ package com.antonchernov.yetilibrary.rest.controller;
 import com.antonchernov.yetilibrary.rest.model.Book;
 import com.antonchernov.yetilibrary.rest.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,12 +13,14 @@ import java.util.List;
  */
 @RestController
 
-@RequestMapping("api/books")
+@RequestMapping("rest/books")
+@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 public class BookController {
     @Autowired
     public BookRepository repository;
 
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Book getBookById(@PathVariable String id) {
 

@@ -1,4 +1,4 @@
-package com.antonchernov.yetilibrary.rest.controller.open;
+package com.antonchernov.yetilibrary.rest.controller;
 
 
 import com.antonchernov.yetilibrary.rest.model.Greetings;

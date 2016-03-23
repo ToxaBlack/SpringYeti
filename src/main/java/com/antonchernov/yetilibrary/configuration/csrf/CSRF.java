@@ -1,5 +1,8 @@
 package com.antonchernov.yetilibrary.configuration.csrf;
 
+import org.springframework.stereotype.Component;
+
+
 public class CSRF {
 	/**
 	 * The name of the cookie with the CSRF token sent by the server as a response.
