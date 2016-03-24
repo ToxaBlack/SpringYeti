@@ -3,6 +3,11 @@ package com.antonchernov.yetilibrary.rest.controller;
 import com.antonchernov.yetilibrary.rest.model.Book;
 import com.antonchernov.yetilibrary.rest.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,10 +32,11 @@ public class BookController {
         return repository.findOne(id);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public List<Book> getAllBooks() {
 
-        return repository.findAll();
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<Page<Book>> getBooksPage(Pageable pageable) {
+        Page<Book> bookList = repository.findAll(pageable);
+        return new ResponseEntity(bookList, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
