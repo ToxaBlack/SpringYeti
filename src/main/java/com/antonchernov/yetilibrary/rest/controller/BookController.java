@@ -5,13 +5,8 @@ import com.antonchernov.yetilibrary.rest.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PagedResourcesAssembler;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * Created by anton.charnou on 21.03.2016.
@@ -25,7 +20,7 @@ public class BookController {
     public BookRepository repository;
 
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Book getBookById(@PathVariable String id) {
 
@@ -34,18 +29,18 @@ public class BookController {
 
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Page<Book>> getBooksPage(Pageable pageable) {
-        Page<Book> bookList = repository.findAll(pageable);
-        return new ResponseEntity(bookList, HttpStatus.OK);
+    public Page<Book> getBooksPage(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.POST)
     public Book createBook(@RequestBody Book newBook) {
-
         newBook.setId(null);
         return repository.save(newBook);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public Book updateBook(@PathVariable String id, @RequestBody Book updatedBook) {
 
@@ -53,8 +48,9 @@ public class BookController {
         return repository.save(updatedBook);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    void removeBook(@PathVariable String id) {
+    void deleteBook(@PathVariable String id) {
 
         repository.delete(id);
     }

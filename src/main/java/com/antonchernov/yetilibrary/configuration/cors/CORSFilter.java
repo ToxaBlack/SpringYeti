@@ -1,6 +1,10 @@
 package com.antonchernov.yetilibrary.configuration.cors;
 
 import com.antonchernov.yetilibrary.configuration.csrf.CSRF;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.Filter;
@@ -18,8 +22,9 @@ import java.util.List;
 
 public class CORSFilter implements Filter {
 
-	// This is to be replaced with a list of domains allowed to access the server
-	private final List<String> allowedOrigins = Arrays.asList("http://localhost:3000");
+
+	@Autowired
+	private CorsConfig corsConfig;
 
 	public void destroy() {
 	}
@@ -33,7 +38,7 @@ public class CORSFilter implements Filter {
 
 			// Access-Control-Allow-Origin
 			String origin = request.getHeader("Origin");
-			response.setHeader("Access-Control-Allow-Origin", allowedOrigins.contains(origin) ? origin : "");
+			response.setHeader("Access-Control-Allow-Origin", corsConfig.getUrls().contains(origin) ? origin : "");
 			response.setHeader("Vary", "Origin");
 
 			// Access-Control-Max-Age
@@ -43,7 +48,7 @@ public class CORSFilter implements Filter {
 			response.setHeader("Access-Control-Allow-Credentials", "true");
 
 			// Access-Control-Allow-Methods
-			response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+			response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
 
 			// Access-Control-Allow-Headers
 			response.setHeader("Access-Control-Allow-Headers",

@@ -1,21 +1,11 @@
 package com.antonchernov.yetilibrary;
 
-import com.antonchernov.yetilibrary.configuration.ApplicationSecurity;
-import com.antonchernov.yetilibrary.rest.model.Book;
-import com.antonchernov.yetilibrary.rest.repository.BookRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
-import java.util.Arrays;
-import java.util.Collections;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 @SpringBootApplication
+@EnableConfigurationProperties
 public class YetiLibraryApplication {
 
 
