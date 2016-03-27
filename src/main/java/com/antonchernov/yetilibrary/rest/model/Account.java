@@ -20,6 +20,11 @@ public class Account implements UserDetails {
     private String password;
     private List<SimpleGrantedAuthority> roles;
 
+    public Account(String username, String password, List<SimpleGrantedAuthority> roles) {
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+    }
 
     public List<SimpleGrantedAuthority> getRoles() {
         return roles;
